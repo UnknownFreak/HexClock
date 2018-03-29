@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DesktopApplication.Windows"
         xmlns:Default="clr-namespace:" xmlns:Shapes="clr-namespace:DesktopApplication.Shapes" x:Name="window" x:Class="DesktopApplication.Windows.ClockWindow"
         mc:Ignorable="d"
-        Title="ClockWindow" Height="147.166" Width="359" ResizeMode="NoResize" Background="{x:Null}" Foreground="#FF474747" Closing="window_Closing" Loaded="window_Loaded" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False">
+        Title="ClockWindow" Height="147.166" Width="359" ResizeMode="NoResize" Background="{x:Null}" Foreground="#FF474747" Closing="Window_Closing" Loaded="Window_Loaded" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False">
     <Window.Resources>
         <Default:ColorToSolidColorBrushValueConverter x:Key="ColorToSolidColorBrushValueConverter"/>
     </Window.Resources>

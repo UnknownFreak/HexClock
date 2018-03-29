@@ -23,36 +23,37 @@ namespace HexClock
             exit_button.Click += window.Kill;
             trayIcon = new NotifyIcon()
             {
+                Text = "Hex Clock",
                 Icon = Resources.Hex,
                 ContextMenu = new ContextMenu(new MenuItem[] {
-                new MenuItem("Save Settings", saveSettings),
-                new MenuItem("Default Color", defaultColor),
-                new MenuItem("Set Color", setColor),
+                new MenuItem("Save Settings", SaveSettings),
+                new MenuItem("Default Color", DefaultColor),
+                new MenuItem("Set Color", SetColor),
                 exit_button
             }),
                 Visible = true
             };
         }
 
-        void setColor(object sender, EventArgs e)
+        void SetColor(object sender, EventArgs e)
         {
-            BrushConverter bc = new BrushConverter();
-            Brush b = bc.ConvertFromString("#FFFFFFFF") as Brush;
-            ColorPicker cp = new ColorPicker();
-            cp.DataContext = b;
+            Brush brush = new BrushConverter().ConvertFromString("#FFFFFFFF") as Brush;
+            ColorPicker cp = new ColorPicker
+            {
+                DataContext = brush
+            };
             cp.ShowDialog();
-            window.UpdateColor(b);
-            Settings.Default.CurrentColor = b.ToString();
-
+            window.UpdateColor(brush);
+            Settings.Default.CurrentColor = brush.ToString();
         }
 
-        void defaultColor(object s, EventArgs e)
+        void DefaultColor(object s, EventArgs e)
         {
             Settings.Default.Reset();
             window.UpdateColor(new BrushConverter().ConvertFromString(Settings.Default.CurrentColor) as Brush);
         }
 
-        void saveSettings(object s, EventArgs e)
+        void SaveSettings(object s, EventArgs e)
         {
             using (FileStream fs = File.Open(SettingsFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
             {
@@ -62,7 +63,7 @@ namespace HexClock
 
         }
 
-        public static string readColorFromSettings()
+        public static string ReadColorFromSettings()
         {
             string color = "";
             try
@@ -82,7 +83,7 @@ namespace HexClock
                 }
             }
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             { }
             return color;
         }

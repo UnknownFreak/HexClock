@@ -23,23 +23,23 @@ namespace DesktopApplication.Windows
             InitializeComponent();
             Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - 250;
             Top = 0;
-            updateTime(this, null);
+            UpdateTime(this, null);
 
 
             timeUpdater = new DispatcherTimer();
-            timeUpdater.Tick += new EventHandler(updateTime);
+            timeUpdater.Tick += new EventHandler(UpdateTime);
             timeUpdater.Interval = new TimeSpan(0, 0, 0, 0, 500);
             timeUpdater.Start();
 
             tray = new HexClock.ClockTrayIcon(this);
 
-            string colorSetting = HexClock.ClockTrayIcon.readColorFromSettings();
+            string colorSetting = HexClock.ClockTrayIcon.ReadColorFromSettings();
             if (colorSetting != "")
                 HexClock.Properties.Settings.Default.CurrentColor = colorSetting;
             UpdateColor(new BrushConverter().ConvertFromString(HexClock.Properties.Settings.Default.CurrentColor) as Brush);
         }
 
-        private void updateTime(object sender, EventArgs e)
+        private void UpdateTime(object sender, EventArgs e)
         {
             TimeModel.Time = GetTime;
             TimeModel.Date = GetDate;
@@ -89,20 +89,20 @@ namespace DesktopApplication.Windows
 
         private String GetDateYear { get { return GetSystemDateYear(); } }
 
-        private void window_Closing(object sender, CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             //HexClock.Properties.Settings.Default.Save();
             timeUpdater.Stop();
             tray.Exit(null, null);
         }
 
-        private void hexShape_Click(object sender, RoutedEventArgs e)
+        private void HexShape_Click(object sender, RoutedEventArgs e)
         {
             new Settings().Show();
             e.Handled = true;
         }
 
-        private void window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             setParent(new WindowInteropHelper(this).Handle);
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
@@ -119,13 +119,13 @@ namespace DesktopApplication.Windows
                 DragMove();
         }
 
-        private void hexShape_MouseUp(object sender, MouseButtonEventArgs e)
+        private void HexShape_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            hexShape_Click(sender,e);
+            HexShape_Click(sender,e);
         }
-        private void hexShape_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void HexShape_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            hexShape_Click(sender, e);
+            HexShape_Click(sender, e);
         }
 
         private void SetColorClick(object sender, RoutedEventArgs e)
