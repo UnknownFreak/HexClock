@@ -1,37 +1,36 @@
-﻿<Button
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DesktopApplication.Shapes"
-             xmlns:Default="clr-namespace:" x:Name="button" x:Class="DesktopApplication.Shapes.HexShape"
-             mc:Ignorable="d" Height="48.03" Width="42.364" BorderBrush="Black">
-    <Button.Resources>
-        <Style x:Key="ButtonNormal" TargetType="Button">
-            <Style.Triggers>
-                <Trigger Value="true" Property="IsMouseOver">
-                    <Setter Property="BorderBrush" Value="LightBlue" />
-                    <Setter Property="Background" Value="WhiteSmoke" />
-                </Trigger>
-                <Trigger Value="true" Property="IsPressed">
-                    <Setter Property="BorderBrush" Value="LightBlue" />
-                    <Setter Property="Background" Value="LightBlue"/>
-                </Trigger>
-            </Style.Triggers>
+﻿<TextBox
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:shapes="clr-namespace:DesktopApplication.Shapes"
+    x:Name="button" x:Class="DesktopApplication.Shapes.HexShape"
+    mc:Ignorable="d" Height="48.03" Width="42.364" Margin="0" SelectionBrush="{Binding Foreground, ElementName=button}" BorderBrush="White" Background="#0A0DD6F5">
+    <TextBox.Resources>
+        <shapes:ColorToSolidColorBrushValueConverter x:Key="ColorToSolidColorBrushValueConverter"/>
+        <Style x:Key="ButtonNormal" TargetType="TextBox">
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
                         <Grid Width="Auto" Height="Auto" x:Name="Grid">
                             <Path x:Name="Border" Width="Auto" Height="Auto" Stretch="Fill" Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 Z" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}"/>
-                            <TextBlock Foreground="{TemplateBinding Foreground}" Text="{Binding Content, ElementName=button}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="tb" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Foreground="{Binding SelectionBrush, ElementName=button}" OverridesDefaultStyle="True">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=tb}" ShadowDepth="0" BlurRadius="7"/>
+                                </TextBlock.Effect><Run Text="{Binding Text, ElementName=button}"/>
+                            </TextBlock>
+                            <Path x:Name="pathGlowWhite" Stroke="{Binding BorderBrush, ElementName=button}" Stretch="Fill" StrokeDashCap="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Fill="{Binding Background, ElementName=button}" HorizontalAlignment="Right" Width="359">
+                                <Path.Effect>
+                                    <DropShadowEffect Color="{Binding Stroke, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=pathGlowWhite}" Opacity="0.8" ShadowDepth="0" BlurRadius="7"/>
+                                </Path.Effect>
+                            </Path>
                         </Grid>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-    </Button.Resources>
-    <Button.Style>
+    </TextBox.Resources>
+    <TextBox.Style>
         <Binding Mode="OneWay" Source="{StaticResource ButtonNormal}"/>
-    </Button.Style>
-</Button>
+    </TextBox.Style>
+</TextBox>

@@ -4,146 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApplication.Windows"
-        xmlns:Default="clr-namespace:" xmlns:Shapes="clr-namespace:DesktopApplication.Shapes" x:Name="window" x:Class="DesktopApplication.Windows.ClockWindow"
+        xmlns:Shapes="clr-namespace:DesktopApplication.Shapes" x:Name="window" x:Class="DesktopApplication.Windows.ClockWindow"
         mc:Ignorable="d"
         Title="ClockWindow" Height="147.166" Width="359" ResizeMode="NoResize" Background="{x:Null}" Foreground="#FF474747" Closing="Window_Closing" Loaded="Window_Loaded" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False">
     <Window.Resources>
-        <Default:ColorToSolidColorBrushValueConverter x:Key="ColorToSolidColorBrushValueConverter"/>
+        <Shapes:ColorToSolidColorBrushValueConverter x:Key="ColorToSolidColorBrushValueConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <local:TimeModel x:Name="TimeModel"/>
     </Window.DataContext>
     <Grid HorizontalAlignment="Left" Width="359" Height="147" VerticalAlignment="Top">
         <Grid x:Name="DateGrid" HorizontalAlignment="Left" Height="100" Margin="2,40,0,0" VerticalAlignment="Top" Width="193">
-            <Grid x:Name="YearGrid" HorizontalAlignment="Left" Height="82" Margin="41,0,0,0" VerticalAlignment="Top" Width="70">
-                <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="70" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-                <TextBlock x:Name="datey" HorizontalAlignment="Left" Margin="4,19,0,0" VerticalAlignment="Top" Width="66" FontSize="32" Height="58" Foreground="{Binding Foreground, ElementName=window}">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=datey}" ShadowDepth="0" BlurRadius="7"/>
-                    </TextBlock.Effect><Run Text="{Binding Date_y}"/></TextBlock>
-            </Grid>
-            <Grid x:Name="MonthDayGrid" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="82" Margin="110,0,0,0">
-                <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="0,17,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-                <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="41,17,-1,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-                <TextBlock x:Name="date" HorizontalAlignment="Left" Margin="5,19,-1,0" VerticalAlignment="Top" Width="78" FontSize="32" Height="45" Foreground="{Binding Foreground, ElementName=window}">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=date}" ShadowDepth="0" BlurRadius="7"/>
-                    </TextBlock.Effect><Run Text="{Binding Date}"/></TextBlock>
-            </Grid>
-            <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="0,17,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-            <TextBlock x:Name="d_x" HorizontalAlignment="Left" Margin="5,19,0,0" VerticalAlignment="Top" Width="66" FontSize="32" Height="58" Foreground="{Binding Foreground, ElementName=window}">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=d_x}" ShadowDepth="0" BlurRadius="7"/>
-                </TextBlock.Effect><Run Text="0x"/></TextBlock>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="70" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Margin="41,1,0,0" Text="{Binding DateYear}" />
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Margin="110,17,0,0" Text="{Binding DateMonth}"/>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Margin="152,17,-1,0" Text="{Binding DateDay}"/>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Margin="0,17,0,0" Text="0x" />
         </Grid>
         <Grid x:Name="TimeGrid" Margin="16,15,219,82">
-            <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="41,0,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-            <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="82,0,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-            <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp"/>
-            <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="44,3,-2,0" VerticalAlignment="Top" Width="82" FontSize="32" Height="47" Foreground="{Binding Foreground, ElementName=window}">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=time}" ShadowDepth="0" BlurRadius="7"/>
-                </TextBlock.Effect><Run Text="{Binding Time}"/></TextBlock>
-            <TextBlock x:Name="t_x" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="66" FontSize="32" Height="45" Foreground="{Binding Foreground, ElementName=window}">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="{Binding Foreground, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=t_x}" ShadowDepth="0" BlurRadius="7"/>
-                </TextBlock.Effect><Run Text="0x"/></TextBlock>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Text="{Binding TimeHours}" Margin="41,0,0,0"/>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Text="{Binding TimeMinutes}" Margin="82,0,0,0"/>
+            <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="42" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Foreground="{Binding Foreground, ElementName=window}" Text="0x"/>
         </Grid>
-        <Path x:Name="pathGlowWhite" Stroke="White" Stretch="Fill" StrokeDashCap="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Fill="#0A0DD6F5" HorizontalAlignment="Right" Width="359">
-            <Path.Effect>
-                <DropShadowEffect Color="{Binding Stroke, Converter={StaticResource ColorToSolidColorBrushValueConverter}, ElementName=pathGlowWhite}" Opacity="0.8" ShadowDepth="0" BlurRadius="7"/>
-            </Path.Effect>
-
-        </Path>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="161,25,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="143,36,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="194,32,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="176,40,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="27,103,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="46,129,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="108,109,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="142,101,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
-        <Shapes:HexShape Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Effect="{Binding Effect, ElementName=pathGlowWhite}" Margin="7,8,0,0" Click="hexShape_Click" MouseUp="hexShape_MouseUp" MouseLeftButtonUp="hexShape_MouseLeftButtonUp" RenderTransformOrigin="0.5,0.5">
-            <Shapes:HexShape.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Shapes:HexShape.RenderTransform>
-        </Shapes:HexShape>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="161,25,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="143,36,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="194,32,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="176,40,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="27,103,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="46,129,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="108,109,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="24" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="142,101,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Shapes:HexShape HorizontalAlignment="Left" VerticalAlignment="Top" Height="14" Width="12" BorderBrush="{Binding Stroke, ElementName=pathGlowWhite}" Background="{Binding Fill, ElementName=pathGlowWhite}" Margin="7,8,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Rectangle x:Name="pathGlowWhite" Visibility="Hidden" Fill="#140DD6F5" HorizontalAlignment="Left" Height="17" Margin="305,8,0,0" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="White" VerticalAlignment="Top" Width="38"/>
     </Grid>
 </Window>

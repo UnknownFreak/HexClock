@@ -41,45 +41,15 @@ namespace DesktopApplication.Windows
 
         private void UpdateTime(object sender, EventArgs e)
         {
-            TimeModel.Time = GetTime;
-            TimeModel.Date = GetDate;
-            TimeModel.Date_y = GetDateYear;
-        }
+            DateTime date = DateTime.Now;
 
-        private string GetSystemTime()
-        {
-            string m = DateTime.Now.Minute.ToString("x2");
-            string h = DateTime.Now.Hour.ToString("x2");
-            //string longtime = DateTime.Now.ToLongTimeString();
-            //string shortime = DateTime.Now.ToShortTimeString();
+            TimeModel.DateDay = date.Day.ToString("x2");
+            TimeModel.DateMonth = date.Month.ToString("x2");
+            TimeModel.DateYear = date.Year.ToString("x4");
 
-            return $"{h} {m}";
-        }
-        private String GetTime { get { return GetSystemTime(); } }
-        private string GetSystemDate()
-        {
+            TimeModel.TimeHours = date.Hour.ToString("x2");
+            TimeModel.TimeMinutes = date.Minute.ToString("x2");
 
-            string d = DateTime.Now.Day.ToString("x2");
-            string m = DateTime.Now.Month.ToString("x2");
-            //string y = DateTime.Now.Year.ToString("x4");
-
-            //string longDate = DateTime.Now.ToLongDateString();
-            //string shortDate = DateTime.Now.ToShortDateString();
-
-            return $"{m} {d}";
-        }
-        private String GetDate { get { return GetSystemDate(); } }
-
-        private string GetSystemDateYear()
-        {
-
-            string y = DateTime.Now.Year.ToString("x4");
-            //string y = DateTime.Now.Year.ToString("x4");
-
-            //string longDate = DateTime.Now.ToLongDateString();
-            //string shortDate = DateTime.Now.ToShortDateString();
-
-            return $"{y}";
         }
 
         public void UpdateColor(Brush b)
@@ -87,11 +57,8 @@ namespace DesktopApplication.Windows
             Foreground = b;
         }
 
-        private String GetDateYear { get { return GetSystemDateYear(); } }
-
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //HexClock.Properties.Settings.Default.Save();
             timeUpdater.Stop();
             tray.Exit(null, null);
         }
@@ -152,21 +119,27 @@ namespace DesktopApplication.Windows
     {
         public TimeModel()
         {
-            //if(Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                Time = "FF FF";
-                Date = "FF FF";
-                Date_y = "FFFF";
-            }
+            m_DateYear = "FFFF";
+            m_TimeHours = m_TimeMinutes = "FF";
+            m_DateMonth = m_DateDay = "FF";
+
         }
-   
-        string m_Time = default(string);
-        public string Time { get { return m_Time; } set { SetProperty(ref m_Time, value); } }
-        string m_Date = default(string);
-        public string Date { get { return m_Date; } set { SetProperty(ref m_Date, value); } }
-        string m_Date_y = default(string);
-        public string Date_y { get { return m_Date_y; } set { SetProperty(ref m_Date_y, value); } }
-   
+
+
+        string m_TimeMinutes = String.Empty;
+        string m_TimeHours = String.Empty;
+
+        string m_DateYear = String.Empty;
+        string m_DateMonth = String.Empty;
+        string m_DateDay = String.Empty;
+
+
+        public string TimeMinutes { get { return m_TimeMinutes; } set { SetProperty(ref m_TimeMinutes, value); } }
+        public string TimeHours { get { return m_TimeHours; } set { SetProperty(ref m_TimeHours, value); } }
+        public string DateYear { get { return m_DateYear; } set { SetProperty(ref m_DateYear, value); } }
+        public string DateMonth { get { return m_DateMonth; } set { SetProperty(ref m_DateMonth, value); } }
+        public string DateDay { get { return m_DateDay; } set { SetProperty(ref m_DateDay, value); } }
+
         public event PropertyChangedEventHandler PropertyChanged;
    
         protected void SetProperty<T> (ref T storage, T value, [System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
